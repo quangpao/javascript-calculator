@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.calculator-box {
+  width: 400px;
+  height: 500px;
+  background-color: #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+}
+
+.display-box {
+  width: 100%;
+  height: 20%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.input-box {
+  width: 100%;
+  height: 80%;
+  position: relative;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; */
+}
+
+.clear-box {
+  display: flex;
+  justify-content: right;
+}
+
+#clear {
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px;
+  cursor: pointer;
+  width: 47.5%;
+}
+
+.numbers {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  float: left;
+}
+
+.numbers > button {
+  width: 25%;
+  height: 25%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.operators {
+  float: right;
+  width: 25%;
+  height: 100%;
+}
+
+.operators > button {
+  width: 89%;
+  height: 25%;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px;
+  cursor: pointer;
+}
+
+#equals, #decimal {
+  border: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+.row-content {
+  width: 100%;
+  height: 70%;
+}
+
+// After this is the CSS for the buttons
+
+.fill:hover,
+.fill:focus {
+  box-shadow: inset 0 0 0 2em var(--hover);
+}
+
+// Animate the size, outside
+.pulse:hover, 
+.pulse:focus {
+  animation: pulse 1s;
+  box-shadow: 0 0 0 0.5em transparent;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--hover); }
+}
+
+// Stack multiple shadows, one from the left, the other from the right
+.close:hover,
+.close:focus {
+  box-shadow: 
+    inset -3.5em 0 0 0 var(--hover),
+    inset 3.5em 0 0 0 var(--hover);  
+}
+
+// Size can also be negative; see how it's smaller than the element
+.raise:hover,
+.raise:focus {
+  box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+  transform: translateY(-0.25em);
+}
+
+// Animating from the bottom
+.up:hover,
+.up:focus {
+  box-shadow: inset 0 -3.25em 0 0 var(--hover);
+}
+
+// And from the left
+.slide:hover,
+.slide:focus {
+  box-shadow: inset 6.5em 0 0 0 var(--hover);
+}
+
+// Multiple shadows, one on the outside, another on the inside
+.offset {  
+  box-shadow: 
+    0.3em 0.3em 0 0 var(--color),
+    inset 0.3em 0.3em 0 0 var(--color);
+  
+  &:hover,
+  &:focus {
+    box-shadow: 
+      0 0 0 0 var(--hover),
+      inset 6em 3.5em 0 0 var(--hover);
+  }
+}
+
+//=== Set button colors
+// If you wonder why use Sass vars or CSS custom properties...
+  // Make a map with the class names and matching colors
+$colors: (
+  fill: #a972cb,
+  pulse: #ef6eae, 
+  close: #ff7f82, 
+  raise: #ffa260, 
+  up: #e4cb58, 
+  slide: #8fc866, 
+  offset: #19bc8b
+);
+
+// Sass variables compile to a static string; CSS variables are dynamic and inherited
+  // Loop through the map and set CSS custom properties using Sass variables
+@each $button, $color in $colors {
+  .#{$button} {
+    --color: #{$color};
+    --hover: #{adjust-hue($color, 45deg)};
+  }
+}
+
+// Now every button will have different colors as set above. We get to use the same structure, only changing the custom properties.
+button {  
+  color: var(--color);
+  transition: 0.25s;
+  
+  &:hover,
+  &:focus { 
+    border-color: var(--hover);
+    color: #6DA8A9;
+  }
+}
+
+.display-box {
+    position: relative;
+}
+
+#display {
+    font-size: 20px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
