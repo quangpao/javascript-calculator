@@ -34,7 +34,7 @@ class Calculator extends React.Component {
 
       var operators = expression.split("#").filter(function (n) { return n });
       for (var i = 0; i < operators.length; i++) {
-        if (operators[i].length == 2 && operators[i][1] == '-') {
+        if (operators[i].length === 2 && operators[i][1] === '-') {
           break
         }
         if (operators[i].length >= 2) {
@@ -43,7 +43,7 @@ class Calculator extends React.Component {
       }
 
       var resultArr = [];
-      for (var i = 0; i < numbers.length; i++) {
+      for (i = 0; i < numbers.length; i++) {
         resultArr.push(numbers[i]);
         if (i < operators.length) resultArr.push(operators[i]);
       }
